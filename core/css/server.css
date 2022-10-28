@@ -4845,7 +4845,7 @@ kbd {
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-.toastify.dialogs {
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI {
   min-width: 200px;
   background: none;
   background-color: var(--color-main-background);
@@ -4859,12 +4859,14 @@ kbd {
   display: flex;
   align-items: center;
 }
-.toastify.dialogs .toast-undo-container {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-container__svyJs {
   display: flex;
   align-items: center;
 }
-.toastify.dialogs .toast-undo-button,
-.toastify.dialogs .toast-close {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ {
   position: static;
   overflow: hidden;
   box-sizing: border-box;
@@ -4877,8 +4879,9 @@ kbd {
   background-color: transparent;
   min-height: 0;
 }
-.toastify.dialogs .toast-undo-button.toast-close,
-.toastify.dialogs .toast-close.toast-close {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv.toast_toast-close__jbbSJ,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ.toast_toast-close__jbbSJ {
   text-indent: 0;
   opacity: 0.4;
   border: none;
@@ -4887,56 +4890,67 @@ kbd {
   font-size: 0;
   /* dark theme overrides for Nextcloud 25 and later */
 }
-.toastify.dialogs .toast-undo-button.toast-close::before,
-.toastify.dialogs .toast-close.toast-close::before {
-  background-image: url("./close.svg");
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv.toast_toast-close__jbbSJ::before,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ.toast_toast-close__jbbSJ::before {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTYiIHdpZHRoPSIxNiI+CiAgPHBhdGggZD0iTTE0IDEyLjNMMTIuMyAxNCA4IDkuNyAzLjcgMTQgMiAxMi4zIDYuMyA4IDIgMy43IDMuNyAyIDggNi4zIDEyLjMgMiAxNCAzLjcgOS43IDh6Ii8+Cjwvc3ZnPgo=");
   content: " ";
   filter: var(--background-invert-if-dark);
   display: inline-block;
   width: 16px;
   height: 16px;
 }
-.toastify.dialogs .toast-undo-button.toast-undo-button,
-.toastify.dialogs .toast-close.toast-undo-button {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv.toast_toast-undo-button__-zxpv,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ.toast_toast-undo-button__-zxpv {
   margin: 3px;
-  height: calc(100% - 2 * 3px);
+  height: calc(100% - 6px);
   margin-left: 12px;
 }
-.toastify.dialogs .toast-undo-button:hover, .toastify.dialogs .toast-undo-button:focus, .toastify.dialogs .toast-undo-button:active,
-.toastify.dialogs .toast-close:hover,
-.toastify.dialogs .toast-close:focus,
-.toastify.dialogs .toast-close:active {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv:hover, .toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv:focus, .toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-undo-button__-zxpv:active,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ:hover,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ:focus,
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ:active {
   cursor: pointer;
   opacity: 1;
 }
-.toastify.dialogs.toastify-top {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toastify-top__CvPad {
   right: 10px;
 }
-.toastify.dialogs.toast-with-click {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-with-click__r4CBR {
   cursor: pointer;
 }
-.toastify.dialogs.toast-error {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-error__v4UIM {
   border-left: 3px solid var(--color-error);
 }
-.toastify.dialogs.toast-info {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-info__s6BhU {
   border-left: 3px solid var(--color-primary);
 }
-.toastify.dialogs.toast-warning {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-warning__q-Msc {
   border-left: 3px solid var(--color-warning);
 }
-.toastify.dialogs.toast-success {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-success__fva2b {
   border-left: 3px solid var(--color-success);
 }
-.toastify.dialogs.toast-undo {
+
+.toast_toastify__VG2Rg.toast_dialogs__rG5MI.toast_toast-undo__WtGZj {
   border-left: 3px solid var(--color-success);
 }
 
 /* dark theme overrides for Nextcloud 24 and earlier */
-.theme--dark .toastify.dialogs .toast-close {
+.toast_theme--dark__nNWX9 .toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ {
   /* close icon style */
 }
-.theme--dark .toastify.dialogs .toast-close.toast-close::before {
-  background-image: url("./close-dark.svg");
+
+.toast_theme--dark__nNWX9 .toast_toastify__VG2Rg.toast_dialogs__rG5MI .toast_toast-close__jbbSJ.toast_toast-close__jbbSJ::before {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTYiIHdpZHRoPSIxNiI+CiAgPHBhdGggZD0iTTE0IDEyLjNMMTIuMyAxNCA4IDkuNyAzLjcgMTQgMiAxMi4zIDYuMyA4IDIgMy43IDMuNyAyIDggNi4zIDEyLjMgMiAxNCAzLjcgOS43IDh6IiBzdHlsZT0iZmlsbC1vcGFjaXR5OjE7ZmlsbDojZmZmZmZmIi8+Cjwvc3ZnPgo=");
 }
 
 #body-public {
