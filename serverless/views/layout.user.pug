@@ -1,0 +1,44 @@
+html(class="ng-csp" data-placeholder-focus="false")
+	head(data-user= userId data-user-displayname= userName)
+	meta(charset="utf-8")
+	title= title
+	meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+	meta(name="theme-color" content="#0082c9")
+	//-
+		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
+		<link rel="apple-touch-icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon-touch.png')); ?>">
+		<link rel="apple-touch-icon-precomposed" href="<?php print_unescaped(image_path($_['appid'], 'favicon-touch.png')); ?>">
+		<link rel="mask-icon" sizes="any" href="<?php print_unescaped(image_path($_['appid'], 'favicon-mask.svg')); ?>" color="<?php p($theme->getColorPrimary()); ?>">
+		<link rel="manifest" href="<?php print_unescaped(image_path($_['appid'], 'manifest.json')); ?>">
+	body(id= bodyId)
+		header(role="banner" id="header")
+			div(class="header-left")
+				a(href="/")
+					div(class="logo logo-icon")
+				nav(id="header-left__appmenu")
+
+			div(class="header-right")
+				//-
+					<div id="unified-search"></div>
+					<div id="notifications"></div>
+				div(id="settings")
+					div(id="expand" tabindex="0" role="button" class="menutoggle" aria-haspopup="true" aria-controls="expanddiv" aria-expanded="false")
+
+					nav(class="settings-menu" id="expanddiv" style="display:none;")
+					//-
+						<ul>
+						<?php foreach ($_['settingsnavigation'] as $entry):?>
+							<li data-id="<?php p($entry['id']); ?>">
+								<a href="<?php print_unescaped($entry['href'] !== '' ? $entry['href'] : '#'); ?>"
+									<?php if ($entry["active"]): ?> class="active"<?php endif; ?>>
+									<img alt="" src="<?php print_unescaped($entry['icon'] . '?v=' . $_['versionHash']); ?>">
+									<?php p($entry['name']) ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+
+		//- <div id="sudo-login-background" class="hidden"></div>
+
+		div(id="content" class="app-#{appId}" role="main")= content
