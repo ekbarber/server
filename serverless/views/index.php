@@ -1,1 +1,0 @@
-../../apps/dashboard/templates/index.php
