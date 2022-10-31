@@ -38,9 +38,11 @@ use OCP\Calendar\Exceptions\CalendarException;
 interface IHandleImipMessage extends ICalendar {
 
 	/**
+	 * Handle an iMIP VEvent for validation and processing
+	 *
 	 * @since 26.0.0
 	 *
-	 * @throws CalendarException
+	 * @throws CalendarException  on validation failure or calendar write error
 	 */
 	public function handleIMipMessage(string $name, string $calendarData): void;
 }
