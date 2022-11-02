@@ -8,6 +8,13 @@ html(class="ng-csp" data-placeholder-focus="false")
 		meta(name="theme-color" content="#0082c9")
 		link(rel="stylesheet" href="core/css/server.css")
 		link(rel="stylesheet" href="theming/css/default.css")
+
+		script(src="/dist/core-common.js" nonce="" defer="")
+		script(src="/dist/core-main.js"  nonce="" defer="")
+		script(src="/dist/user_status-menu.js"  nonce="" defer="")
+
+		script(src="/apps/settings/js/usersettings.js"  nonce="" defer="")
+		script(src="/apps/settings/js/settings.js"  nonce="" defer="")
 	
 	//-
 		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
@@ -16,6 +23,8 @@ html(class="ng-csp" data-placeholder-focus="false")
 		<link rel="mask-icon" sizes="any" href="<?php print_unescaped(image_path($_['appid'], 'favicon-mask.svg')); ?>" color="<?php p($theme->getColorPrimary()); ?>">
 		<link rel="manifest" href="<?php print_unescaped(image_path($_['appid'], 'manifest.json')); ?>">
 	body(id="body-user")
+		input(id="initial-state-user_status-status" type='hidden' value= userStatusInitialState)
+		input(id="initial-state-user_status-profileEnabled" type='hidden' value= profileEnabled)
 		header(role="banner" id="header")
 			div(class="header-left")
 				a(href="/")
@@ -29,8 +38,12 @@ html(class="ng-csp" data-placeholder-focus="false")
 					<div id="notifications"></div>
 				div(id="settings")
 					div(id="expand" tabindex="0" role="button" class="menutoggle" aria-haspopup="true" aria-controls="expanddiv" aria-expanded="false")
+						div(id="avatardiv-menu" class="avatardiv" data-user= userId)
 
 					nav(class="settings-menu" id="expanddiv" style="display:none;")
+						ul
+							li
+								a(href="google.com") Google
 					//-
 						<ul>
 						<?php foreach ($_['settingsnavigation'] as $entry):?>
