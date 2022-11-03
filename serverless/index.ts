@@ -3,6 +3,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 
 import Debug from 'debug';
+import { resolveTypeReferenceDirective } from 'typescript';
 
 const debug = Debug('nextcloud')
 
@@ -58,6 +59,11 @@ app.post('/login', bodyParser.urlencoded({ extended: false }), (req, res) =>{
     }
     req.session.user = user;
     res.redirect('/')
+})
+
+app.get('/logout', (req, res)=>{
+    delete req.session.user
+    res.redirect('/login');
 })
 
 app.listen(3000)
