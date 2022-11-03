@@ -1,0 +1,36 @@
+doctype html
+html(class="ng-csp" data-placeholder-focus="false")
+	head(data-user= userId data-user-displayname= userName)
+		meta(charset="utf-8")
+		title= title
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+		meta(name="theme-color" content="#0082c9")
+		link(rel="stylesheet" href="core/css/server.css")
+		link(rel="stylesheet" href="core/css/guest.css")
+		link(rel="stylesheet" href="theming/css/default.css")
+
+		script(src="/dist/core-common.js" nonce="" defer="")
+		script(src="/dist/core-main.js"  nonce="" defer="")
+		script(src="/dist/core-login.js"  nonce="" defer="")
+
+
+
+	
+	//-
+		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
+		<link rel="apple-touch-icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon-touch.png')); ?>">
+		<link rel="apple-touch-icon-precomposed" href="<?php print_unescaped(image_path($_['appid'], 'favicon-touch.png')); ?>">
+		<link rel="mask-icon" sizes="any" href="<?php print_unescaped(image_path($_['appid'], 'favicon-mask.svg')); ?>" color="<?php p($theme->getColorPrimary()); ?>">
+		<link rel="manifest" href="<?php print_unescaped(image_path($_['appid'], 'manifest.json')); ?>">
+	body(id= bodyId)
+		input(id="initial-state-user_status-status" type='hidden' value= userStatusInitialState)
+		input(id="initial-state-user_status-profileEnabled" type='hidden' value= profileEnabled)
+		div(class="wrapper")
+			div(class="v-align")
+				header(role="banner")
+					div(id="header")
+						div(class="logo")
+							h1(class="hidden-visually") Eddie
+				main
+					block content
