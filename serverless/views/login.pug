@@ -2,23 +2,4 @@ extends layout.guest.pug
 
 block content
     div(id="login")
-//-
-    div
-        div(class="guest-box login-box")
-            div
-                div
-                    form(class="login-form" method="post" name="login" action="/login")
-                        fieldset(class="login-form__fieldset")
-                            h2(class="login-form__headline") Log in to Nextcloud
-                            div(class="input-field")
-                                label(class="input-field__label" for="user") Account name or email
-                                div(class="input-field__main-wrapper")
-                                    input(id="user" class="input-field__input" type="text" trailingbuttonicon="close" name="user" autocomplete="username" autocapitalize="none" spellcheck="true" required="required")
-                                    div(class="input-field__icon input-field__icon--leading")
-                            div(class="input-field")
-                                label(class="input-field__label" for="password") Password
-                                div(class="input-field__main-wrapper")
-                                    input(id="password" class="input-field__input input-field__input--trailing-icon" type="password" name="password" autocomplete="current-password" minlength="0" required="required")
-                                    div(class="input-field__icon input-field__icon--leading")
-                            button(class="button-vue button-vue--icon-and-text button-vue--vue-primary button-vue--wide" type="submit")
                                 

@@ -11,10 +11,16 @@ html(class="ng-csp" data-placeholder-focus="false")
 
 		script(src="/dist/core-common.js" nonce="" defer="")
 		script(src="/dist/core-main.js"  nonce="" defer="")
-		script(src="/dist/user_status-menu.js"  nonce="" defer="")
+		script(src="/dist/core-files_fileinfo.js" nonce="" defer="")
+		script(src="/dist/core-files_client.js" nonce="" defer="")
 
+		script(src="/dist/dashboard-main.js" nonce="" defer="")
+		script(src="/dist/user_status-menu.js"  nonce="" defer="")
+		script(src="/dist/user_status-dashboard.js" nonce="" defer="")
 		script(src="/apps/settings/js/usersettings.js"  nonce="" defer="")
 		script(src="/apps/settings/js/settings.js"  nonce="" defer="")
+
+		
 	
 	//-
 		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
@@ -23,8 +29,11 @@ html(class="ng-csp" data-placeholder-focus="false")
 		<link rel="mask-icon" sizes="any" href="<?php print_unescaped(image_path($_['appid'], 'favicon-mask.svg')); ?>" color="<?php p($theme->getColorPrimary()); ?>">
 		<link rel="manifest" href="<?php print_unescaped(image_path($_['appid'], 'manifest.json')); ?>">
 	body(id="body-user")
-		input(id="initial-state-user_status-status" type='hidden' value= userStatusInitialState)
-		input(id="initial-state-user_status-profileEnabled" type='hidden' value= profileEnabled)
+		each val, key in initialStates
+			each stateVal, stateKey in val
+				input(id=`initial-state-${key}-${stateKey}` type='hidden' value=stateVal)
+		div(id="skip-actions")
+			a(href="#app-dashboard" class="button primary skip-navigation skip-content") Skip to main content
 		header(role="banner" id="header")
 			div(class="header-left")
 				a(href="/")
@@ -57,6 +66,7 @@ html(class="ng-csp" data-placeholder-focus="false")
 						<?php endforeach; ?>
 						</ul>
 
-		//- <div id="sudo-login-background" class="hidden"></div>
+		
 
-		div(id="content" class="app-#{appId}" role="main")= content
+		div(id="content" class="app-#{appId}" role="main")
+			block content
