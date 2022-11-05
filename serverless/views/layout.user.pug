@@ -47,26 +47,13 @@ html(class="ng-csp" data-placeholder-focus="false")
 					<div id="notifications"></div>
 				div(id="settings")
 					div(id="expand" tabindex="0" role="button" class="menutoggle" aria-haspopup="true" aria-controls="expanddiv" aria-expanded="false")
-						div(id="avatardiv-menu" class="avatardiv" data-user= userId)
+						div(id="avatardiv-menu" class="avatardiv" data-user= userId data-displayname= userName)
 
 					nav(class="settings-menu" id="expanddiv" style="display:none;")
 						ul
+							li(data-id="user_status-menuitem")
 							li
 								a(href="/logout") Logout
-					//-
-						<ul>
-						<?php foreach ($_['settingsnavigation'] as $entry):?>
-							<li data-id="<?php p($entry['id']); ?>">
-								<a href="<?php print_unescaped($entry['href'] !== '' ? $entry['href'] : '#'); ?>"
-									<?php if ($entry["active"]): ?> class="active"<?php endif; ?>>
-									<img alt="" src="<?php print_unescaped($entry['icon'] . '?v=' . $_['versionHash']); ?>">
-									<?php p($entry['name']) ?>
-								</a>
-							</li>
-						<?php endforeach; ?>
-						</ul>
-
-		
 
 		div(id="content" class="app-#{appId}" role="main")
 			block content

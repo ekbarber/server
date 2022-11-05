@@ -140,6 +140,7 @@ app.get('/', (req, res)=> {
     const data = {
         title:'Nextcloud Serverless',  
         userId:'eddie',
+        userName:req.session.user?.username,
         initialStates: _.mapValues(initialStates, (stateType: any) => _.mapValues(stateType, (state: any)=>Buffer.from(JSON.stringify(state)).toString('base64')))
     }
     res.render('dashboard', data)
