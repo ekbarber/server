@@ -6,8 +6,15 @@ import { User } from '../../../lib/model/User';
 
 describe('UserController', ()=>{
     
-    it('return a user for username eddie', async()=>{
+    it('return undefined when a user does not exist', async()=>{
         const uc = new UserController();
-        expect(uc.lookupByUserName('eddie')).to.eql(new User('eddie'))
+        expect(uc.lookupByUserName('eddie')).to.be.undefined
+    })
+    it('return a user when a user does exist', async()=>{
+        const uc = new UserController();
+        const user = new User({userName: 'eddie'});
+        uc.saveUser(user);
+
+        expect(uc.lookupByUserName('eddie')).to.be.eq(user)
     })
 })
