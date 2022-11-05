@@ -1,4 +1,7 @@
 extends layout.user.pug
 
+block append scripts 
+    script(src="/dist/dashboard-main.js" nonce="" defer="")
+    script(src="/dist/user_status-dashboard.js" nonce="" defer="")
 block content
     h1 Eddie

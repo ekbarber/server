@@ -4,23 +4,41 @@ html(class="ng-csp" data-placeholder-focus="false")
 		meta(charset="utf-8")
 		title= title
 		meta(name="viewport" content="width=device-width, initial-scale=1.0")
-
-		meta(name="theme-color" content="#0082c9")
-		link(rel="stylesheet" href="core/css/server.css")
-		link(rel="stylesheet" href="theming/css/default.css")
-
-		script(src="/dist/core-common.js" nonce="" defer="")
-		script(src="/dist/core-main.js"  nonce="" defer="")
-		script(src="/dist/core-files_fileinfo.js" nonce="" defer="")
-		script(src="/dist/core-files_client.js" nonce="" defer="")
-
-		script(src="/dist/dashboard-main.js" nonce="" defer="")
-		script(src="/dist/user_status-menu.js"  nonce="" defer="")
-		script(src="/dist/user_status-dashboard.js" nonce="" defer="")
-		script(src="/apps/settings/js/usersettings.js"  nonce="" defer="")
-		script(src="/apps/settings/js/settings.js"  nonce="" defer="")
-
 		
+		meta(name="theme-color" content="#0082c9")
+		block css
+			link(rel="stylesheet" href="/core/css/server.css")
+			link(rel="stylesheet" href="/theming/css/default.css")
+		
+		block scripts
+			script(src="/dist/core-common.js" nonce="" defer="")
+			script(src="/dist/core-main.js"  nonce="" defer="")
+			script(src="/dist/core-files_fileinfo.js" nonce="" defer="")
+			script(src="/dist/core-files_client.js" nonce="" defer="")
+			script(src="/dist/user_status-menu.js"  nonce="" defer="")
+		script(none="").
+			var _oc_debug=false;
+			var _oc_isadmin=true;
+			var backendAllowsPasswordConfirmation=true;
+			var oc_dataURL="data";
+			var _oc_webroot="";
+			var _oc_appswebroots={"cloud_federation_api":"/apps/cloud_federation_api","comments":"/apps/comments","contactsinteraction":"/apps/contactsinteraction","dashboard":"/apps/dashboard","dav":"/apps/dav","federatedfilesharing":"/apps/federatedfilesharing","federation":"/apps/federation","files":"/apps/files","files_sharing":"/apps/files_sharing","files_trashbin":"/apps/files_trashbin","files_versions":"/apps/files_versions","lookup_server_connector":"/apps/lookup_server_connector","oauth2":"/apps/oauth2","provisioning_api":"/apps/provisioning_api","settings":"/apps/settings","sharebymail":"/apps/sharebymail","systemtags":"/apps/systemtags","theming":"/apps/theming","twofactor_backupcodes":"/apps/twofactor_backupcodes","updatenotification":"/apps/updatenotification","user_status":"/apps/user_status","viewer":false,"weather_status":"/apps/weather_status","workflowengine":"/apps/workflowengine"};
+			var datepickerFormatDate="M\/d\/yy";
+			var nc_lastLogin=1667520612;
+			var nc_pageLoad=1667671441;
+			var dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+			var dayNamesShort=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."];
+			var dayNamesMin=["Su","Mo","Tu","We","Th","Fr","Sa"];
+			var monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+			var monthNamesShort=["Jan.","Feb.","Mar.","Apr.","May.","Jun.","Jul.","Aug.","Sep.","Oct.","Nov.","Dec."];
+			var firstDay=0;
+			var _oc_config={"session_lifetime":1440,"session_keepalive":true,"auto_logout":false,"version":"26.0.0.0","versionstring":"26.0.0 dev","enable_avatars":true,"lost_password_link":null,"modRewriteWorking":false,"sharing.maxAutocompleteResults":25,"sharing.minSearchStringLength":0,"blacklist_files_regex":"\\.(part|filepart)$","loglevel":2};
+			var oc_appconfig={"core":{"defaultExpireDateEnabled":false,"defaultExpireDate":null,"defaultExpireDateEnforced":null,"enforcePasswordForPublicLink":false,"enableLinkPasswordByDefault":false,"sharingDisabledForUser":false,"resharingAllowed":true,"remoteShareAllowed":true,"federatedCloudShareDoc":"https:\/\/docs.nextcloud.com\/server\/26\/go.php?to=user-sharing-federated","allowGroupSharing":true,"defaultInternalExpireDateEnabled":false,"defaultInternalExpireDate":null,"defaultInternalExpireDateEnforced":null,"defaultRemoteExpireDateEnabled":false,"defaultRemoteExpireDate":null,"defaultRemoteExpireDateEnforced":null},"files":{"max_chunk_size":10485760}};
+			var _theme={"entity":"Nextcloud","name":"Nextcloud","productName":"Nextcloud","title":"Nextcloud","baseUrl":"https:\/\/nextcloud.com","syncClientUrl":"https:\/\/nextcloud.com\/install\/#install-clients","docBaseUrl":"https:\/\/docs.nextcloud.com","docPlaceholderUrl":"https:\/\/docs.nextcloud.com\/server\/26\/go.php?to=PLACEHOLDER","slogan":"a safe home for all your data","logoClaim":"","folder":""};
+			var oc_userconfig={"avatar":{"version":0,"generated":true}};
+
+ 
+
 	
 	//-
 		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
@@ -53,7 +71,9 @@ html(class="ng-csp" data-placeholder-focus="false")
 						ul
 							li(data-id="user_status-menuitem")
 							li
+								a(href="/settings/user") Personal Settings
+							li
 								a(href="/logout") Logout
 
-		div(id="content" class="app-#{appId}" role="main")
+		div(id="content" class=`app-${appId}` role="main")
 			block content
