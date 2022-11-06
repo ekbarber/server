@@ -1,5 +1,8 @@
+import Debug from "debug";
 import { isThisTypeNode } from "typescript";
 import { IUser, User } from "../model/User";
+
+const debug = Debug('nextcloud')
 
 export class UserController{
     users:Map<string, User> = new Map();
@@ -11,6 +14,10 @@ export class UserController{
         return new User(userProps);
     }
     saveUser(user:User):User{
+        debug({
+            msg:'saving user',
+            user
+        })
         this.users.set(user.userName, user);
         return user;
     }

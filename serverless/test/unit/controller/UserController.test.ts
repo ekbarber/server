@@ -17,4 +17,15 @@ describe('UserController', ()=>{
 
         expect(uc.lookupByUserName('eddie')).to.be.eq(user)
     })
+
+    it('should update the email address correctly', ()=>{
+        const uc = new UserController();
+        const user = new User({userName: 'eddie'});
+
+        user.email = 'test@example.com';
+
+        uc.saveUser(user);
+
+        expect(uc.lookupByUserName('eddie')?.email).to.be.eql('test@example.com')
+    })
 })

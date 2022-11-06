@@ -8,16 +8,16 @@ import Debug from 'debug';
 
 import initialStates from './config/initialStates.json'
 import { User } from './lib/model/User';
-import { UserController } from './lib/controller/UserController';
+import UserController  from './lib/controller';
+import v2ApiRouter from "./lib/routes/api/v2"
 const debug = Debug('nextcloud')
 
 const app = express();
 
-const userController = new UserController();
-
 declare module 'express-session' {
     interface SessionData {
       user: User;
+      lastLogin: Date
     }
   }
 
@@ -36,27 +36,58 @@ declare global {
     }
   }
 }
+
+function getInitialStates(user:User){
+  return _.merge({}, initialStates, {
+    settings:{
+      personalInfoParameters:{
+        emailMap:{
+          primaryEmail:{
+            name:'email',
+            value: user.email
+          }
+        }
+      }
+    }
+  })
+}
 app.use(compression())
+app.set('view engine', 'pug');
+app.use(express.static('resources'));
+
 app.use(session({
     secret:'nextcloud',
     store: new FileStore()
 }))
+
 app.use((req, res, next)=>{
-  req.templateProps = {
-    title:'Nextcloud Serverless',  
-    userId:'eddie',
-    userName:req.session.user?.userName,
-    initialStates: _.mapValues(initialStates, (stateType: any) => _.mapValues(stateType, (state: any)=>Buffer.from(JSON.stringify(state)).toString('base64')))
+  if(req.session.user){
+    UserController.saveUser(req.session.user)
   }
+  next()
+})
+app.use((req, res, next)=>{
+  if(req.session.user){
+    req.templateProps = {
+      title:'Nextcloud Serverless',  
+      userId: req.session.user.userName,
+      userName:req.session.user.userName,
+      initialStates: _.mapValues(getInitialStates(req.session.user), (stateType: any) => _.mapValues(stateType, (state: any)=>Buffer.from(JSON.stringify(state)).toString('base64')))
+    }
+  }else{
+    console.warn('no user')
+  }
+
   next();
 })
-app.set('view engine', 'pug');
-app.use(express.static('resources'));
+
 
 app.use((req, res, next)=>{
     req.url = req.url.replace('index.php/', '')
     next()
 })
+
+app.use('/ocs/v2.php/cloud', v2ApiRouter)
 
 app.get('/', (req, res)=> {
     debug({session: req.session})
@@ -77,14 +108,31 @@ app.get('/login', (req, res)=>{
 })
 
 app.post('/login', bodyParser.urlencoded({ extended: false }), (req, res) =>{
-    const user = userController.createUser({userName: req.body.userName})
+
+    const user = UserController.createUser({userName: req.body.user})
+    debug({
+      msg:'login',
+      user
+    })
     req.session.user = user;
+    req.session.lastLogin = new Date()
+    debug({user})
     req.session.save((err)=>{
       if(err){
         throw `could not save session: ${err}`
       }
       res.redirect('/')
     })
+})
+
+app.post('/login/confirm', bodyParser.json(), (req, res)=>{
+  debug({
+    session: req.session
+  })
+  const lastLogin = req.session.lastLogin instanceof Date ? req.session.lastLogin.getTime() : req.session.lastLogin
+  res.send({
+    lastLogin
+  })
 })
 
 app.get('/logout', (req, res)=>{
