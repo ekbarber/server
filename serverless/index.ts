@@ -42,10 +42,7 @@ function getInitialStates(user:User){
     settings:{
       personalInfoParameters:{
         emailMap:{
-          primaryEmail:{
-            name:'email',
-            value: user.email
-          }
+          primaryEmail:user.email
         }
       }
     }

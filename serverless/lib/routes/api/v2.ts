@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import Debug from 'debug';
 import UserController from '../../controller';
 import { User } from '../../model/User';
+import { Email } from '../../model/Email';
 
 
 
@@ -15,15 +16,20 @@ router.put('/users/:userName', bodyParser.json(), (req, res)=>{
     debug({
         body: req.body
     })
-    const key = req.body.key as "email"
-    const value = req.body.value as string
     const user = UserController.lookupByUserName(userName);
     if(!user){
         res.statusCode = 404;
         res.send('user not found');
         return
     }
-    user[key] = value
+
+    const key = req.body.key
+    const value = req.body.value as string
+    if(key === 'email'){
+        const email = Email.createPrimary(value)
+        user.email = email;
+    }
+    
     res.send({ocs:{
         meta:{
             status:'ok',
