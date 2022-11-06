@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.1",
+    "canvas": "^2.10.2",
     "chai": "^4.3.6",
     "compression": "^1.7.4",
     "debug": "^4.3.4",

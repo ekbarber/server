@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import Debug from 'debug';
-import UserController from '../../controller';
+import UserController from '../../controller/UserController';
 import { User } from '../../model/User';
 import { Email } from '../../model/Email';
 
@@ -11,7 +11,7 @@ import { Email } from '../../model/Email';
 const debug = Debug('nextcloud:routes:api:v2');
 const router = express.Router();
 
-router.put('/users/:userName', bodyParser.json(), (req, res)=>{
+router.put('/cloud/users/:userName', bodyParser.json(), (req, res)=>{
     const userName = req.params.userName;
     debug({
         body: req.body
@@ -37,6 +37,13 @@ router.put('/users/:userName', bodyParser.json(), (req, res)=>{
             message:'OK'
         }
     }})
+})
+
+router.put('/apps/user_status/api/v1/heartbeat', (req, res)=>{
+
+    //TODO: Lookup actual user status here
+    const userStatus = {"userId":"eddie","message":null,"messageId":null,"messageIsPredefined":false,"icon":null,"clearAt":null,"status":"online","statusIsUserDefined":false}
+    res.send(userStatus)
 })
 
 export = router;

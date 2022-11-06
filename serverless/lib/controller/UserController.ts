@@ -4,7 +4,7 @@ import { IUser, User } from "../model/User";
 
 const debug = Debug('nextcloud')
 
-export class UserController{
+class UserController{
     users:Map<string, User> = new Map();
     lookupByUserName(userName:string): User | undefined{
         const user = this.users.get(userName);
@@ -22,3 +22,4 @@ export class UserController{
         return user;
     }
 }
+export default new UserController()

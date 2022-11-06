@@ -8,8 +8,9 @@ import Debug from 'debug';
 
 import initialStates from './config/initialStates.json'
 import { User } from './lib/model/User';
-import UserController  from './lib/controller';
+import UserController from './lib/controller/UserController';
 import v2ApiRouter from "./lib/routes/api/v2"
+import AvatarRouter from './lib/routes/avatar';
 const debug = Debug('nextcloud')
 
 const app = express();
@@ -78,13 +79,13 @@ app.use((req, res, next)=>{
   next();
 })
 
-
+app.use('/index.php/avatar', AvatarRouter)
 app.use((req, res, next)=>{
     req.url = req.url.replace('index.php/', '')
     next()
 })
 
-app.use('/ocs/v2.php/cloud', v2ApiRouter)
+app.use('/ocs/v2.php', v2ApiRouter)
 
 app.get('/', (req, res)=> {
     debug({session: req.session})

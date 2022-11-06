@@ -1,3 +1,3 @@
-import { UserController } from "./UserController";
+import AvatarController from "./AvatarController";
+import UserController from "./UserController";
 
-export = new UserController()
