@@ -11,12 +11,12 @@ import { Email } from '../../model/Email';
 const debug = Debug('nextcloud:routes:api:v2');
 const router = express.Router();
 
-router.put('/cloud/users/:userName', bodyParser.json(), (req, res)=>{
+router.put('/cloud/users/:userName', bodyParser.json(), async (req, res)=>{
     const userName = req.params.userName;
     debug({
         body: req.body
     })
-    const user = UserController.lookupByUserName(userName);
+    const user = await UserController.lookupByUserName(userName);
     if(!user){
         res.statusCode = 404;
         res.send('user not found');
@@ -29,7 +29,7 @@ router.put('/cloud/users/:userName', bodyParser.json(), (req, res)=>{
         const email = Email.createPrimary(value)
         user.email = email;
     }
-    
+
     res.send({ocs:{
         meta:{
             status:'ok',

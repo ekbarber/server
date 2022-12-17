@@ -11,6 +11,8 @@ import { User } from './lib/model/User';
 import UserController from './lib/controller/UserController';
 import v2ApiRouter from "./lib/routes/api/v2"
 import AvatarRouter from './lib/routes/avatar';
+import { checkPw, hashPw } from './lib/util';
+import { setupDb } from './lib/db';
 const debug = Debug('nextcloud')
 
 const app = express();
@@ -31,7 +33,7 @@ declare module 'express-session' {
     appId?: String
   }
 declare global {
-  namespace Express { 
+  namespace Express {
     export interface Request {
       templateProps?: TemplateProps
     }
@@ -58,16 +60,16 @@ app.use(session({
     store: new FileStore()
 }))
 
-app.use((req, res, next)=>{
-  if(req.session.user){
-    UserController.saveUser(req.session.user)
-  }
-  next()
-})
+// app.use((req, res, next)=>{
+//   if(req.session.user){
+//     UserController.saveUser(req.session.user)
+//   }
+//   next()
+// })
 app.use((req, res, next)=>{
   if(req.session.user){
     req.templateProps = {
-      title:'Nextcloud Serverless',  
+      title:'Nextcloud Serverless',
       userId: req.session.user.userName,
       userName:req.session.user.userName,
       initialStates: _.mapValues(getInitialStates(req.session.user), (stateType: any) => _.mapValues(stateType, (state: any)=>Buffer.from(JSON.stringify(state)).toString('base64')))
@@ -105,16 +107,25 @@ app.get('/login', (req, res)=>{
     res.render('login', _.merge( req.templateProps, props))
 })
 
-app.post('/login', bodyParser.urlencoded({ extended: false }), (req, res) =>{
+app.post('/login', bodyParser.urlencoded({ extended: false }), async(req, res) =>{
 
-    const user = UserController.createUser({userName: req.body.user})
-    debug({
-      msg:'login',
-      user
-    })
+	const user = await UserController.lookupByUserName(req.body.user);
+	debug({user})
+	if(!user){
+		res.sendStatus(401)
+		return;
+	}
+	const userPw = user.password;
+	if(!userPw){
+		throw new Error('user password cannot be blank')
+	}
+	if(!checkPw(req.body.password, userPw)){
+		res.sendStatus(401);
+		return;
+	}
     req.session.user = user;
     req.session.lastLogin = new Date()
-    debug({user})
+
     req.session.save((err)=>{
       if(err){
         throw `could not save session: ${err}`
@@ -146,4 +157,19 @@ app.get('/settings/user', (req, res)=>{
   return;
 })
 
-app.listen(3000)
+setupDb()
+	.then(setupInitialUser)
+  	.then(()=>app.listen(3000))
+
+async function setupInitialUser(){
+  let user = await UserController.lookupByUserName('eddie');
+  debug({initialUser: user})
+  if(!user){
+    const userProps = {
+      userName: 'eddie',
+      password: await hashPw('eddie')
+    }
+    user = new User(userProps)
+    await UserController.saveUser(user)
+  }
+}
