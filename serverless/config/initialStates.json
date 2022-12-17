@@ -9,6 +9,32 @@
         "layout":["recommendations"],
         "firstRun":false
     },
+	"core":{
+		"apps":{
+			"dashboard": {
+				"id": "dashboard",
+				"order": "-1",
+				"href": "/index.php/apps/dashboard/",
+				"icon": "/apps/dashboard/img/dashboard.svg",
+				"type": "link",
+				"name": "Dashboard",
+				"active": true,
+				"classes": "",
+				"unread": 0
+			},
+			"files": {
+				"id": "files",
+				"order": "0",
+				"href": "/index.php/apps/files/",
+				"icon": "/apps/files/img/app.svg",
+				"type": "link",
+				"name": "Files",
+				"active": false,
+				"classes": "",
+				"unread": 0
+			}
+		}
+	},
     "settings":{
       "has-reasons-use-nextcloud-pdf":false,
       "personalInfoParameters":{

@@ -4,12 +4,12 @@ html(class="ng-csp" data-placeholder-focus="false")
 		meta(charset="utf-8")
 		title= title
 		meta(name="viewport" content="width=device-width, initial-scale=1.0")
-		
+
 		meta(name="theme-color" content="#0082c9")
 		block css
 			link(rel="stylesheet" href="/core/css/server.css")
 			link(rel="stylesheet" href="/theming/css/default.css")
-		
+
 		block scripts
 			script(src="/dist/core-common.js" nonce="" defer="")
 			script(src="/dist/core-main.js"  nonce="" defer="")
@@ -37,9 +37,9 @@ html(class="ng-csp" data-placeholder-focus="false")
 			var _theme={"entity":"Nextcloud","name":"Nextcloud","productName":"Nextcloud","title":"Nextcloud","baseUrl":"https:\/\/nextcloud.com","syncClientUrl":"https:\/\/nextcloud.com\/install\/#install-clients","docBaseUrl":"https:\/\/docs.nextcloud.com","docPlaceholderUrl":"https:\/\/docs.nextcloud.com\/server\/26\/go.php?to=PLACEHOLDER","slogan":"a safe home for all your data","logoClaim":"","folder":""};
 			var oc_userconfig={"avatar":{"version":0,"generated":true}};
 
- 
 
-	
+
+
 	//-
 		<link rel="icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon.ico')); /* IE11+ supports png */ ?>">
 		<link rel="apple-touch-icon" href="<?php print_unescaped(image_path($_['appid'], 'favicon-touch.png')); ?>">
@@ -54,10 +54,16 @@ html(class="ng-csp" data-placeholder-focus="false")
 			a(href="#app-dashboard" class="button primary skip-navigation skip-content") Skip to main content
 		header(role="banner" id="header")
 			div(class="header-left")
-				a(href="/")
+				a(id="nextcloud" href="/")
 					div(class="logo logo-icon")
 						h1(class="hidden-visually") Nextcloud's homepage
-				nav(id="header-left__appmenu")
+				nav#header-left__appmenu
+				//- nav.app-menu
+				//- 	ul.app-menu-main
+				//- 		li(class="app-menu-entry" data-app-id="dashboard")
+				//- 			a(href="/index.php/apps/dashboard/")
+				//- 				img(src="/apps/dashboard/img/dashboard.svg")
+				//- 				div.app-menu-entry--label Dashboard
 
 			div(class="header-right")
 				//-
