@@ -1,0 +1,48 @@
+extends layout.user.pug
+
+block append css
+	link(rel="stylesheet" href="/apps/settings/css/settings.css")
+
+block append scripts
+	script(defer="" src="/dist/files-main.js")
+	script(defer="" src="/dist/files-sidebar.js")
+	script(defer="" src="/apps/files/js/fileinfomodel.js")
+	script(defer="" src="/apps/files/js/merged-index.js")
+
+
+block content
+	div(id="app-navigation" role="navigation")
+		ul(class="with-icon" tabindex="0")
+		#app-settings
+			#app-settings-header
+			#app-settings-content
+				#files-app-settings
+
+	#app-content(tabindex="0")
+		input(type="checkbox" class="hidden-visually" id="showgridview")
+		#app-content-files.hidden.viewcontainer
+			.files-controls
+			.filelist-header
+			.emptyfilelist.emptycontent.hidden
+				.icon-folder
+				h2 No files in here
+			.nofilterresults.emptycontent.hidden
+				.icon-search
+				h2 No entries found in this folder
+			table(class="files-filestable list-container view-grid" data-allow-public-upload="yes" data-preview-x="250" data-preview-y="250")
+				thead
+					tr
+						th.hidden.column-selection
+							input(type="checkbox" id="select_all_files" class="select-all checkbox")
+							label(for="select_all_files")
+								span.hidden-visually Select all
+						th.hidden.column-name
+							.column-name-container
+								a(class="name sort columntitle" onclick="event.preventDefaut()" href="#" data-sort="name")
+									span Name
+									span.sort-indicator
+								span.selectedActions
+									a(href="#" onclick="event.preventDefault()" class="actions-selected")
+										span.icon.icon-more
+										span Actions
+				tbody.files-fileList

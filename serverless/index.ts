@@ -10,6 +10,7 @@ import initialStates from './config/initialStates.json'
 import { User } from './lib/model/User';
 import UserController from './lib/controller/UserController';
 import v2ApiRouter from "./lib/routes/api/v2"
+import webDavRouter from "./lib/routes/webdav"
 import AvatarRouter from './lib/routes/avatar';
 import { checkPw, hashPw } from './lib/util';
 import { setupDb } from './lib/db';
@@ -88,6 +89,7 @@ app.use((req, res, next)=>{
 })
 
 app.use('/ocs/v2.php', v2ApiRouter)
+app.use('/remote.php/dav', webDavRouter)
 
 app.get('/', (req, res)=> {
     debug({session: req.session})
@@ -157,6 +159,19 @@ app.get('/settings/user', (req, res)=>{
   return;
 })
 
+app.get('/apps/files', (req, res)=>{
+	const apps = {
+		"files":{}
+	}
+	const props = _.merge(req.templateProps, {
+	  appId: 'files'
+	})
+	res.render('files', props)
+	return;
+  })
+
+
+app.propfind('')
 setupDb()
 	.then(setupInitialUser)
   	.then(()=>app.listen(3000))
