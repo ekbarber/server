@@ -2,12 +2,13 @@ extends layout.user.pug
 
 block append css
 	link(rel="stylesheet" href="/apps/settings/css/settings.css")
+	link(rel="stylesheet" href="/apps/files/css/merged.css")
 
 block append scripts
 	script(defer="" src="/dist/files-main.js")
 	script(defer="" src="/dist/files-sidebar.js")
 	script(defer="" src="/apps/files/js/fileinfomodel.js")
-	script(defer="" src="/apps/files/js/merged-index.js")
+	script(defer="" src="/core/js/merged-index.js")
 
 
 block content
@@ -22,6 +23,8 @@ block content
 		input(type="checkbox" class="hidden-visually" id="showgridview")
 		#app-content-files.hidden.viewcontainer
 			.files-controls
+				.actions.creatable.hidden
+					#uploadprogresswrapper
 			.filelist-header
 			.emptyfilelist.emptycontent.hidden
 				.icon-folder
@@ -38,7 +41,7 @@ block content
 								span.hidden-visually Select all
 						th.hidden.column-name
 							.column-name-container
-								a(class="name sort columntitle" onclick="event.preventDefaut()" href="#" data-sort="name")
+								a(class="name sort columntitle" onclick="event.preventDefault()" href="#" data-sort="name")
 									span Name
 									span.sort-indicator
 								span.selectedActions
@@ -46,3 +49,6 @@ block content
 										span.icon.icon-more
 										span Actions
 				tbody.files-fileList
+			.filelist-footer
+			.hiddenuploadfield
+				input(type="file" id="file_upload_start" class="hiddenuploadfield" name="files[]")

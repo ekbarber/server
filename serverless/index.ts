@@ -10,7 +10,8 @@ import initialStates from './config/initialStates.json'
 import { User } from './lib/model/User';
 import UserController from './lib/controller/UserController';
 import v2ApiRouter from "./lib/routes/api/v2"
-import webDavRouter from "./lib/routes/webdav"
+import davRouter from "./lib/routes/dav"
+import webDavRouter from './lib/routes/webdav'
 import AvatarRouter from './lib/routes/avatar';
 import { checkPw, hashPw } from './lib/util';
 import { setupDb } from './lib/db';
@@ -89,7 +90,8 @@ app.use((req, res, next)=>{
 })
 
 app.use('/ocs/v2.php', v2ApiRouter)
-app.use('/remote.php/dav', webDavRouter)
+app.use('/remote.php/dav', davRouter)
+app.use('/remote.php/webdav', webDavRouter)
 
 app.get('/', (req, res)=> {
     debug({session: req.session})
