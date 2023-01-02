@@ -9,13 +9,19 @@ export function setupDb(){
 			if(err){
 				return reject(err)
 			}
-			db.run(`CREATE TABLE IF NOT EXISTS user (
+			db
+			.run(`CREATE TABLE IF NOT EXISTS user (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				userId text UNIQUE,
 				name text,
 				email text UNIQUE,
 				password text
-			)`,(err)=>{
+			)`)
+			.run(`CREATE TABLE IF NOT EXISTS file (
+				id text PRIMARY KEY,
+				name text
+			)`,
+			(err)=>{
 				if(err){
 					return reject(err)
 				}
